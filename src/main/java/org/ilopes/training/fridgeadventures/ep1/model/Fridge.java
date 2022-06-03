@@ -27,17 +27,17 @@ public class Fridge {
         this.content = content;
     }
 
-    void openDoor(int doorIndex) {
+    public void openDoor(int doorIndex) {
         doorStates[doorIndex] = true;
         isLampOn = true;
     }
 
-    void closeDoor(int doorIndex) {
+    public void closeDoor(int doorIndex) {
         doorStates[doorIndex] = false;
         isLampOn = false;
     }
 
-    void putItam(int doorIndex, Object item) {
+    public void putItam(int doorIndex, Object item) {
         if (!doorStates[doorIndex]) {
             throw new RuntimeException("Hey dude don't forget to open door");
         }
@@ -47,21 +47,21 @@ public class Fridge {
         content.add(item);
     }
 
-    Object getItem(int doorIndex) {
+    public Object getItem(int doorIndex) {
         if (!doorStates[doorIndex]) {
             throw new RuntimeException("Hey dude don't forget to open door");
         }
         return content.remove(0);
     }
 
-    void plug() {
+    public void plug() {
         if (isPlugged) {
             throw new RuntimeException("Hey dude fridge is already plugged");
         }
         isPlugged = true;
     }
 
-    void unplugged() {
+    public void unplugged() {
         if (!isPlugged) {
             throw new RuntimeException("Hey dude fridge is already unplugged");
         }
