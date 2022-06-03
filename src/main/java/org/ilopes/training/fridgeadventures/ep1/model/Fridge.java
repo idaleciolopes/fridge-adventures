@@ -1,46 +1,74 @@
 package org.ilopes.training.fridgeadventures.ep1.model;
 
-public class Fridge {
-    // <editor-fold desc="Specifications">
+import java.util.List;
 
+public class Fridge {
     public static final int MAXIMUM_CAPACITY = 5;
     public static final int NUMBER_OF_DOOR = 2;
 
-    // </editor-fold>
+    private boolean[] doorStates;
+    private List<Object> content;
+    private boolean isPlugged;
+    private boolean isLampOn;
 
-    // <editor-fold desc="Behaviours">
+    public boolean[] getDoorStates() {
+        return doorStates;
+    }
+
+    public void setDoorStates(boolean[] doorStates) {
+        this.doorStates = doorStates;
+    }
+
+    public List<Object> getContent() {
+        return content;
+    }
+
+    public void setContent(List<Object> content) {
+        this.content = content;
+    }
 
     void openDoor(int doorIndex) {
-        throw new RuntimeException("Not implemented yet");
+        doorStates[doorIndex] = true;
+        isLampOn = true;
     }
 
     void closeDoor(int doorIndex) {
-        throw new RuntimeException("Not implemented yet");
+        doorStates[doorIndex] = false;
+        isLampOn = false;
     }
 
     void putItam(int doorIndex, Object item) {
-        throw new RuntimeException("Not implemented yet");
+        if (!doorStates[doorIndex]) {
+            throw new RuntimeException("Hey dude don't forget to open door");
+        }
+        if (content.size() == MAXIMUM_CAPACITY) {
+            throw new RuntimeException("Hey dude fridge is full");
+        }
+        content.add(item);
     }
 
     Object getItem(int doorIndex) {
-        throw new RuntimeException("Not implemented yet");
+        if (!doorStates[doorIndex]) {
+            throw new RuntimeException("Hey dude don't forget to open door");
+        }
+        return content.remove(0);
     }
 
     void plug() {
-        throw new RuntimeException("Not implemented yet");
+        if (isPlugged) {
+            throw new RuntimeException("Hey dude fridge is already plugged");
+        }
+        isPlugged = true;
     }
 
     void unplugged() {
-        throw new RuntimeException("Not implemented yet");
+        if (!isPlugged) {
+            throw new RuntimeException("Hey dude fridge is already unplugged");
+        }
+        isPlugged = false;
     }
-
-    // </editor-fold>
-
-    // <editor-fold desc="Outputs">
 
     public boolean isLampOn() {
-        throw new RuntimeException("Not implemented yet");
+        return isLampOn;
     }
-
-    // </editor-fold>
 }
